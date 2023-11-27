@@ -1,5 +1,5 @@
-#ifndef POISSON_1D_HPP
-#define POISSON_1D_HPP
+#ifndef POISSON_2D_HPP
+#define POISSON_2D_HPP
 
 #include <deal.II/base/quadrature_lib.h>
 
