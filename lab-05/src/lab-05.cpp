@@ -10,10 +10,10 @@
 int
 main(int /*argc*/, char * /*argv*/[])
 {
-  const unsigned int N = 19;
-  const unsigned int r = 1;
+  const std::string &mesh_filename = "../mesh/mesh-cube-40.msh";
+  const unsigned int degree        = 1;
 
-  Poisson3D problem(N, r);
+  Poisson3D problem(mesh_filename, degree);
 
   problem.setup();
   problem.assemble();
