@@ -74,7 +74,7 @@ public:
 
   // Constructor. We provide the final time, time step Delta t and theta method
   // parameter as constructor arguments.
-  Heat(const std::string  &mesh_file_name,
+  Heat(const std::string  &mesh_file_name_,
        const unsigned int &r_,
        const double       &T_,
        const double       &deltat_,

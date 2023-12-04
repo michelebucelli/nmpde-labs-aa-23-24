@@ -251,5 +251,35 @@ Heat::output(const unsigned int &time_step) const
 void
 Heat::solve()
 {
-  // TODO...
+  assemble_matrices();
+
+  pcout << "===============================================" << std::endl;
+
+  // Apply the initial condition.
+  {
+    pcout << "Applying the initial condition" << std::endl;
+
+    VectorTools::interpolate(dof_handler, u_0, solution_owned);
+    solution = solution_owned;
+
+    // Output the initial solution.
+    output(0);
+    pcout << "-----------------------------------------------" << std::endl;
+  }
+
+  unsigned int time_step = 0;
+  double       time      = 0;
+
+  while (time < T)
+    {
+      time += deltat;
+      ++time_step;
+
+      pcout << "n = " << std::setw(3) << time_step << ", t = " << std::setw(5)
+            << time << ":" << std::flush;
+
+      assemble_rhs(time);
+      solve_time_step();
+      output(time_step);
+    }
 }
