@@ -251,7 +251,6 @@ Poisson3DParallel::output() const
 
   const std::filesystem::path mesh_path(mesh_file_name);
   const std::string output_file_name = "output-" + mesh_path.stem().string();
-  std::ofstream     output_file(output_file_name);
 
   // Finally, we need to write in a format that supports parallel output. This
   // can be achieved in multiple ways (e.g. XDMF/H5). We choose VTU/PVTU files,
