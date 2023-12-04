@@ -139,7 +139,7 @@ public:
 
 protected:
   // Path to the mesh file.
-  const std::string &mesh_file_name;
+  const std::string mesh_file_name;
 
   // Polynomial degree.
   const unsigned int r;
