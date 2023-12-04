@@ -15,7 +15,7 @@ main(int argc, char *argv[])
   // dealii (e.g. p4est, PETSc, ...).
   Utilities::MPI::MPI_InitFinalize mpi_init(argc, argv);
 
-  const std::string &mesh_filename = "../mesh/mesh-cube-40.msh";
+  const std::string  mesh_filename = "../mesh/mesh-cube-40.msh";
   const unsigned int degree        = 1;
 
   Poisson3DParallel problem(mesh_filename, degree);

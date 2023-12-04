@@ -10,7 +10,7 @@
 int
 main(int /*argc*/, char * /*argv*/[])
 {
-  const std::string &mesh_filename = "../mesh/mesh-cube-40.msh";
+  const std::string  mesh_filename = "../mesh/mesh-cube-40.msh";
   const unsigned int degree        = 1;
 
   Poisson3D problem(mesh_filename, degree);
