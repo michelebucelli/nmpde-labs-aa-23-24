@@ -211,60 +211,17 @@ Stokes::assemble()
             {
               for (unsigned int j = 0; j < dofs_per_cell; ++j)
                 {
-                  // Viscosity term.
-                  cell_matrix(i, j) +=
-                    nu *
-                    scalar_product(fe_values[velocity].gradient(i, q),
-                                   fe_values[velocity].gradient(j, q)) *
-                    fe_values.JxW(q);
-
-                  // Pressure term in the momentum equation.
-                  cell_matrix(i, j) -= fe_values[velocity].divergence(i, q) *
-                                       fe_values[pressure].value(j, q) *
-                                       fe_values.JxW(q);
-
-                  // Pressure term in the continuity equation.
-                  cell_matrix(i, j) -= fe_values[velocity].divergence(j, q) *
-                                       fe_values[pressure].value(i, q) *
-                                       fe_values.JxW(q);
-
-                  // Pressure mass matrix.
-                  cell_pressure_mass_matrix(i, j) +=
-                    fe_values[pressure].value(i, q) *
-                    fe_values[pressure].value(j, q) / nu * fe_values.JxW(q);
+                  // TODO...
                 }
 
-              // Forcing term.
-              cell_rhs(i) += scalar_product(forcing_term_tensor,
-                                            fe_values[velocity].value(i, q)) *
-                             fe_values.JxW(q);
+              // TODO...
             }
         }
 
       // Boundary integral for Neumann BCs.
       if (cell->at_boundary())
         {
-          for (unsigned int f = 0; f < cell->n_faces(); ++f)
-            {
-              if (cell->face(f)->at_boundary() &&
-                  cell->face(f)->boundary_id() == 2)
-                {
-                  fe_face_values.reinit(cell, f);
-
-                  for (unsigned int q = 0; q < n_q_face; ++q)
-                    {
-                      for (unsigned int i = 0; i < dofs_per_cell; ++i)
-                        {
-                          cell_rhs(i) +=
-                            -p_out *
-                            scalar_product(fe_face_values.normal_vector(q),
-                                           fe_face_values[velocity].value(i,
-                                                                          q)) *
-                            fe_face_values.JxW(q);
-                        }
-                    }
-                }
-            }
+          // TODO...
         }
 
       cell->get_dof_indices(dof_indices);
@@ -316,14 +273,7 @@ Stokes::solve()
 
   SolverGMRES<TrilinosWrappers::MPI::BlockVector> solver(solver_control);
 
-  // PreconditionBlockDiagonal preconditioner;
-  // preconditioner.initialize(system_matrix.block(0, 0),
-  //                           pressure_mass.block(1, 1));
-
-  PreconditionBlockTriangular preconditioner;
-  preconditioner.initialize(system_matrix.block(0, 0),
-                            pressure_mass.block(1, 1),
-                            system_matrix.block(1, 0));
+  // TODO: preconditioner
 
   pcout << "Solving the linear system" << std::endl;
   solver.solve(system_matrix, solution_owned, system_rhs, preconditioner);
