@@ -75,6 +75,10 @@ public:
     return solution;
   }
 
+  // Apply relaxation.
+  void
+  apply_relaxation(const Vector<double> &old_solution, const double &lambda);
+
 protected:
   // Build an interface map, that is construct a map that to each DoF on the
   // interface for this subproblem associates the corresponding interface DoF on

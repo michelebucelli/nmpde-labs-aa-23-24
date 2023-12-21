@@ -211,3 +211,11 @@ Poisson2D::compute_interface_map(const Poisson2D &other) const
 
   return interface_map;
 }
+
+void
+Poisson2D::apply_relaxation(const Vector<double> &old_solution,
+                            const double &        lambda)
+{
+  solution *= lambda;
+  solution.add(1.0 - lambda, old_solution);
+}
