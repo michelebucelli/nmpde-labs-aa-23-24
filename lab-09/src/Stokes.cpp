@@ -303,7 +303,7 @@ Stokes::assemble()
                                                {true, true, true, false}));
 
     MatrixTools::apply_boundary_values(
-      boundary_values, system_matrix, solution, system_rhs, false);
+      boundary_values, system_matrix, solution_owned, system_rhs, false);
   }
 }
 
